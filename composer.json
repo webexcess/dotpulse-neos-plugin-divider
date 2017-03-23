@@ -4,7 +4,7 @@
     "description": "Trenner für Inhalte",
     "version": "2.0.11",
     "require": {
-        "dotpulse/base": "2.0*"
+        "dotpulse/base": "~2.0.0"
     },
     "autoload": {
         "psr-0": {
