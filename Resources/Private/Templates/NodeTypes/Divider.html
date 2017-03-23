@@ -1,0 +1,25 @@
+<f:if condition="{renderHR}">
+	<f:then>
+		<f:render section="start" arguments="{_all}" />
+		<hr{attributes -> f:format.raw()}>
+		<f:render section="end" arguments="{_all}" />
+	</f:then>
+	<f:else>
+		<div{attributes -> f:format.raw()}>
+			<f:render section="start" arguments="{_all}" />
+			{titleTag -> f:format.raw()}
+			<f:render section="content" arguments="{_all}" />
+			<f:render section="end" arguments="{_all}" />
+		</div>
+	</f:else>
+</f:if>
+
+<f:section name="start">
+	<f:if condition="{injectStart}">{injectStart -> f:format.raw()}</f:if>
+</f:section>
+<f:section name="end">
+	<f:if condition="{injectEnd}">{injectEnd -> f:format.raw()}</f:if>
+</f:section>
+<f:section name="content">
+	<f:if condition="{showContentCollection}">{dividerContent -> f:format.raw()}</f:if>
+</f:section>

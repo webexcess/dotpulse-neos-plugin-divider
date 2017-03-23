@@ -1,0 +1,69 @@
+namespace: Neos=TYPO3.Neos
+namespace: TypoScript=TYPO3.TypoScript
+namespace: Divider=Dotpulse.Divider
+
+prototype(Divider:Divider) < prototype(TYPO3.Neos:Content) {
+	configuration = ${Configuration.setting('Dotpulse.Divider')}
+	@override.configuration = ${this.configuration}
+
+	showContentCollection = ${configuration.showContentCollection && (q(node).children('dividerContent').children().is() || node.context.inBackend) ? true : false}
+	renderHR = ${q(node).children('dividerContent').children().is() || q(node).property('image') || q(node).property('random') ? false : true}
+	@override.renderHR = ${this.renderHR}
+
+	attributes {
+		class = TypoScript:RawArray {
+			default = ${configuration.class.wrapper}
+			isHR = ${q(node).parent().parent().is('[instanceof TYPO3.Neos:Document]') && renderHR ? 'container' : false}
+		}
+		data-random = TypoScript:Case {
+			hasRandom {
+				condition = ${q(node).property('random')}
+				renderer = TYPO3.TypoScript:Collection {
+					collection = ${q(node).property('random')}
+					itemName = 'image'
+					iterationName = 'iteration'
+					itemRenderer = TYPO3.TypoScript:Array {
+						image = TYPO3.Neos:ImageUri {
+							asset = ${image}
+						}
+						last = ${iteration.isLast ? '' : ','}
+					}
+				}
+			}
+		}
+		data-random.@if.noHR = ${renderHR ? false : true}
+		style = TypoScript:Array {
+			image = TypoScript:Case {
+				hasImage {
+					condition = ${q(node).property('image')}
+					renderer = TypoScript:Array {
+						image = TYPO3.Neos:ImageUri {
+							asset = ${q(node).property('image')}
+						}
+						@process.wrapper = ${'background-image:url(' + value + ');'}
+					}
+				}
+			}
+		}
+		style.@if.noHR = ${renderHR ? false : true}
+		style.@if.needStyle = ${q(node).property('image') ? true : false}
+	}
+
+	titleTag = TypoScript:Tag {
+		tagName = ${configuration.title.tag}
+		attributes.class = ${configuration.class.title}
+		content = ${'<span>' + q(node).property('title') + '</span>'}
+		@if.hasTitle = ${q(node).property('title') ? true : false}
+	}
+
+	dividerContent = TYPO3.Neos:ContentCollection {
+		nodePath = 'dividerContent'
+		attributes.class = TypoScript:RawArray {
+			container = ${container}
+			settings = ${configuration.class.content}
+		}
+	}
+
+	injectStart = ${false}
+	injectEnd = ${false}
+}

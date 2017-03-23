@@ -1,0 +1,15 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        'Dotpulse.Divider': TRUE
+
+Dotpulse:
+  Divider:
+    showContentCollection: TRUE
+    class:
+      wrapper: divider
+      title: divider-title
+      content: divider-content
+    title:
+      tag: h1

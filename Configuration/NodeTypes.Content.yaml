@@ -1,0 +1,52 @@
+#Trenner für Inhalte
+'Dotpulse.Divider:Divider':
+  superTypes:
+    'TYPO3.Neos:Content': TRUE
+    'TYPO3.Neos.NodeTypes:ImageMixin': TRUE
+  ui:
+    label: Störer
+    group: special
+    icon: icon-picture
+    inlineEditable: TRUE
+    inspector:
+      groups:
+        settings:
+          label: Darstellung
+          position: 10
+        background:
+          label: Hintergrundbilder
+          position: 20
+        image:
+          label: Bilder
+          position: 30
+
+  childNodes:
+    dividerContent:
+      type: 'TYPO3.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          'Dotpulse.Divider:Divider': FALSE
+  properties:
+    alternativeText: []
+    image:
+      ui:
+        label: Hintergrundbild
+        reloadPageIfChanged: TRUE
+        inspector:
+          group: background
+          position: 10
+    random:
+      type: array<TYPO3\Media\Domain\Model\Asset>
+      ui:
+        label: 'Zufällige Hintergrundbilder'
+        inspector:
+          group: background
+          position: 20
+    title:
+      type: string
+      ui:
+        inspector:
+          group: settings
+          position: 10
+        label: Titel
+        reloadPageIfChanged: TRUE

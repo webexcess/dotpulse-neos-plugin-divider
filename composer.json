@@ -1,0 +1,22 @@
+{
+    "name": "dotpulse/divider",
+    "type": "typo3-flow-plugin",
+    "description": "Trenner für Inhalte",
+    "version": "2.0.11",
+    "require": {
+        "dotpulse/base": "2.0*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Dotpulse\\Divider": "Classes"
+        }
+    },
+    "authors": [
+        {
+            "name": "dotpulse AG ppa. webexcess GmbH",
+            "email": "neos+dotpulse-opensource@webexcess.ch",
+            "homepage": "http://webexcess.ch",
+            "role": "Developer"
+        }
+    ]
+}
